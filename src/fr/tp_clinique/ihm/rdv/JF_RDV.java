@@ -1,36 +1,63 @@
-
 package fr.tp_clinique.ihm.rdv;
 
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import java.awt.Insets;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+
 public class JF_RDV extends JFrame{
-
+	
+	GridBagConstraints gbc = new GridBagConstraints();
 	private static final long serialVersionUID = 1L;
-
-	public JF_RDV(){
+	
+	public JF_RDV() {
 		
-		JPanel JP_panel = new JPanel();
-		JP_panel.setLayout(new GridBagLayout());
+		//Panel content		
+		JPanel JP_content = new JPanel();
 		
-		GridBagConstraints GBC = new GridBagConstraints();
-		GBC.gridx = 0;
-		GBC.gridy = 0;
-		JP_panel.add(new JP_ToolBar(), GBC);
-		GBC.gridy = 1;
-		JP_panel.add(new JP_ListRDV(), GBC);
+		// Clients
+		gbc.insets = new Insets(5, 5, 5, 5);
+		gbc.gridx = 0;
+		gbc.gridy = 0;
 		
-		add(JP_panel);
+		JP_content.add(new JP_Client(),gbc);
 		
-		setTitle("Agenda");
-		setSize(new Dimension(1000, 700));
-		setLocationRelativeTo(null);
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setVisible(true);
+		// Vétérinaires
+		gbc.insets = new Insets(5, 5, 5, 5);
+		gbc.gridx = 1;
+		gbc.gridy = 0;
 		
+		JP_content.add(new JP_Salarie(),gbc);
+		
+		// Dates
+		gbc.insets = new Insets(5, 5, 5, 5);
+		gbc.gridx = 2;
+		gbc.gridy = 0;
+		
+		JP_content.add(new JP_Date(),gbc);
+		
+		//Liste RDV
+		gbc.insets = new Insets(5, 5, 5, 5);
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		
+		JP_content.add(new JP_ListRDV(),gbc);
+		
+		
+		add(JP_content);
+	
+		this.setSize(1000, 700);
+		this.setTitle("Prise de rendez-vous");
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
+	
+	
+	
+	
+
 }

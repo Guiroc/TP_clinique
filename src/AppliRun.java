@@ -1,16 +1,9 @@
 import javax.swing.SwingUtilities;
-import fr.tp_clinique.ihm.ecran_client.JF_Ecran_Client;
-import fr.tp_clinique.ihm.ecran_animaux.JF_Ecran_Animaux;
-import fr.tp_clinique.ihm.rdv.JF_RDV;
-
-
 
 import fr.tp_clinique.bo.Clients;
 import fr.tp_clinique.dal.ClientDAO;
 import fr.tp_clinique.dal.DALException;
-import fr.tp_clinique.ihm.connexion.JF_Connexion;
-import fr.tp_clinique.ihm.connexion.JP_Login;
-import fr.tp_clinique.ihm.gestion_personnel.JF_Gestion_Personnel;
+import fr.tp_clinique.ihm.rdv.JF_RDV;
 
 
 public class AppliRun {
@@ -34,8 +27,11 @@ public class AppliRun {
 		
 		
 		
-		
-		new JF_Ecran_Client();
+		//new JF_Connexion();
+		//new JF_Ecran_Animaux();
+		//new JF_Gestion_Personnel();
+		//new JF_Agenda();
+		//new JF_Ecran_Client();
 		//new JF_Ecran_Animaux();
 		new JF_RDV();
 	}
