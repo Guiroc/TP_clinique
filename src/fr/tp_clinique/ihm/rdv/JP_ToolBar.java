@@ -8,11 +8,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import org.jdatepicker.JDatePicker;
-import org.jdatepicker.UtilDateModel;
 
 import fr.tp_clinique.bo.Personnels;
 
 public class JP_ToolBar extends JPanel{
+
+	private static final long serialVersionUID = 1L;
 
 	JLabel JL_veterinaire,
 		JL_date;

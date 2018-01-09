@@ -8,6 +8,8 @@ import javax.swing.JTable;
 
 public class JP_ListRDV extends JPanel{
 
+	private static final long serialVersionUID = 1L;
+
 		public JP_ListRDV(){
 			
 			String[] entete = {"Heure", "Nom du client", "Animal", "Race"};

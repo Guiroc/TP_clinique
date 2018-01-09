@@ -6,7 +6,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import org.jdatepicker.JDatePicker;
-import org.jdatepicker.UtilDateModel;
 
 import fr.tp_clinique.bo.Personnels;
 
