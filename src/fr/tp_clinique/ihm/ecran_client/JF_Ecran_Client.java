@@ -19,6 +19,7 @@ public class JF_Ecran_Client extends JFrame{
 		
 		add(JP_panel);
 		
+		setTitle("Client");
 		setSize(new Dimension(1000, 700));
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

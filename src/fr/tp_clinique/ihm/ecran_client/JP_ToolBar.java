@@ -12,16 +12,16 @@ import javax.swing.JTextField;
 public class JP_ToolBar extends JPanel{
 
 	private static final long serialVersionUID = 1L;
-	JButton JB_premier;
-	JButton JB_precedent;
-	JButton JB_suivant;
-	JButton JB_dernier;
-	JButton JB_rechercher;
-	JButton JB_ajouter;
-	JButton JB_supprimer;
+	JButton JB_premier,
+		JB_precedent,
+		JB_suivant,
+		JB_dernier,
+		JB_rechercher,
+		JB_ajouter,
+		JB_supprimer;
 	
-	JLabel JL_espace1;
-	JLabel JL_espace2;
+	JLabel JL_espace1,
+		JL_espace2;
 	
 	JTextField JTF_rechercher;	
 	

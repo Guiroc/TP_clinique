@@ -11,20 +11,20 @@ import javax.swing.JTextField;
 public class JP_Client extends JPanel{
 
 	private static final long serialVersionUID = 1L;
-	JLabel JL_code;
-	JLabel JL_nom;
-	JLabel JL_prenom;
-	JLabel JL_adresse;
-	JLabel JL_cp;
-	JLabel JL_ville;
+	JLabel JL_code,
+		JL_nom,
+		JL_prenom,
+		JL_adresse,
+		JL_cp,
+		JL_ville;
 	
-	JTextField JTF_code;
-	JTextField JTF_nom;
-	JTextField JTF_prenom;
-	JTextField JTF_adresse1;
-	JTextField JTF_adresse2;
-	JTextField JTF_cp;
-	JTextField JTF_ville;
+	JTextField JTF_code,
+		JTF_nom,
+		JTF_prenom,
+		JTF_adresse1,
+		JTF_adresse2,
+		JTF_cp,
+		JTF_ville;
 	
 	public JP_Client(){
 		
