@@ -1,6 +1,7 @@
 package fr.tp_clinique.ihm.rdv;
 
 <<<<<<< Upstream, based on master
+<<<<<<< Upstream, based on master
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -55,6 +56,10 @@ public class JP_ListRDV extends JPanel{
 		add(JB_add, gbc);
 	}
 =======
+=======
+import java.awt.Dimension;
+
+>>>>>>> 37133c2 updtae
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -69,6 +74,7 @@ public class JP_ListRDV extends JPanel{
 			JTable JT_rdv = new JTable(data, entete);
 			
 			JScrollPane JCP_pane = new JScrollPane(JT_rdv);
+			JCP_pane.setPreferredSize(new Dimension(800, 500));
 			
 			add(JCP_pane);
 		}

@@ -1,5 +1,7 @@
 package fr.tp_clinique.ihm.rdv;
 
+import java.awt.Dimension;
+
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -24,6 +26,7 @@ public class JP_ToolBar extends JPanel{
 		JL_veterinaire = new JLabel("Vétérinaire");
 		
 		JCB_veterinaire = new JComboBox<Personnels>();
+		JCB_veterinaire.setPreferredSize(new Dimension(200, 27));
 		
 		JL_date = new JLabel("Date");
 		
@@ -34,6 +37,7 @@ public class JP_ToolBar extends JPanel{
 		add(JL_date);
 		add(JDP_date);
 		
+		setPreferredSize(new Dimension(800, 60));
 		setBorder(BorderFactory.createTitledBorder("De :" ));
 	}
 }
