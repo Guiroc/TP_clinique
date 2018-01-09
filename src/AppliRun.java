@@ -11,7 +11,6 @@ import fr.tp_clinique.dal.DALException;
 import fr.tp_clinique.ihm.connexion.JF_Connexion;
 import fr.tp_clinique.ihm.connexion.JP_Login;
 import fr.tp_clinique.ihm.gestion_personnel.JF_Gestion_Personnel;
-import fr.tp_clinique.ihm.rdv.JF_Rdv;
 
 
 public class AppliRun {
