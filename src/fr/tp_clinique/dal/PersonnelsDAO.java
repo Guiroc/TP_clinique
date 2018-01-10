@@ -14,6 +14,8 @@ public class PersonnelsDAO {
 	
 	private static final String sql_connexion = "select * from personnels where Nom = ? and MotPasse = ?";
 	private static final String sql_selectNotArchive = "select * from personnels";
+	private static final String sql_deleteById = "delete from personnels where CodePers = ?";
+	private static final String sql_addById = "insert into personnels (Nom, MotPasse, Role, Archive) values (?, ?, ?, ?)";
 
 	public Personnels getUnPersonnel(String login, String mdp) {
 		
@@ -34,7 +36,7 @@ public class PersonnelsDAO {
 			}
 		}
 		catch(SQLException e){
-			
+			e.printStackTrace();
 		}
 		return unePersonne;
 	}
@@ -57,9 +59,50 @@ public ArrayList<Personnels> getNotArchivePersonnels() {
 			}
 		}
 		catch(SQLException e){
-			
+			e.printStackTrace();
 		}
 		return desPersonne;
 	}
+
+public void DeletePersonnelsById(int codePers) {
+	// TODO Auto-generated method stub
+	Connection cnx = null;
+	PreparedStatement rqt = null;
+	
+	try {
+
+		cnx = JdbcTools.getConnection();
+		rqt = cnx.prepareStatement(sql_deleteById);
+		rqt.setInt(1, codePers);
+		
+		int rs = rqt.executeUpdate();
+
+	}
+	catch(SQLException e){
+		e.printStackTrace();
+	}
+}
+
+public void addPersonnel(Personnels personnels) {
+	// TODO Auto-generated method stub
+	Connection cnx = null;
+	PreparedStatement rqt = null;
+	
+	try {
+
+		cnx = JdbcTools.getConnection();
+		rqt = cnx.prepareStatement(sql_addById);
+		rqt.setString(1, personnels.getNom());
+		rqt.setString(2, personnels.getMotPasse());
+		rqt.setString(3, personnels.getRole());
+		rqt.setBoolean(4,  personnels.getArchive());
+		
+		int rs = rqt.executeUpdate();
+
+	}
+	catch(SQLException e){
+		e.printStackTrace();
+	}
+}
 
 }

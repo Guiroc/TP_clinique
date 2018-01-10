@@ -23,7 +23,8 @@ public class JdbcTools {
 		urldb = Settings.getProperty("urldb");
 		userdb = Settings.getProperty("userdb");
 		passworddb = Settings.getProperty("passworddb");
-		System.out.println("urldb="+urldb+";userdb="+userdb+";passworddb="+passworddb);
+		//System.out.println("urldb="+urldb+";userdb="+userdb+";passworddb="+passworddb);
+		System.out.println("Settings chargé");
 	}
 	
 	
@@ -31,6 +32,7 @@ public class JdbcTools {
 	public static Connection getConnection() throws SQLException{
 		//Connection connection = DriverManager.getConnection(urldb);
 		Connection connection = DriverManager.getConnection(urldb, userdb, passworddb);
+		System.out.println("BDD connecté");
 		
 		return connection;
 	}

@@ -1,4 +1,5 @@
 
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -13,6 +14,7 @@ import fr.tp_clinique.dal.AnimauxDAO;
 import fr.tp_clinique.dal.ClientDAO;
 import fr.tp_clinique.dal.DALException;
 import fr.tp_clinique.ihm.rdv.JF_RDV;
+
 import fr.tp_clinique.bll.Manager;
 import fr.tp_clinique.ihm.connexion.JF_Connexion;
 import fr.tp_clinique.ihm.ecran_client.JF_Ecran_Client;
