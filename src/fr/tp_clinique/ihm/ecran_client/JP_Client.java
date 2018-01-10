@@ -8,6 +8,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import fr.tp_clinique.bo.Clients;
+
 public class JP_Client extends JPanel{
 
 	private static final long serialVersionUID = 1L;
@@ -16,7 +18,11 @@ public class JP_Client extends JPanel{
 		JL_prenom,
 		JL_adresse,
 		JL_cp,
-		JL_ville;
+		JL_ville,
+		JL_numTel,
+		JL_assurance,
+		JL_email,
+		JL_remarque;
 	
 	JTextField JTF_code,
 		JTF_nom,
@@ -24,19 +30,19 @@ public class JP_Client extends JPanel{
 		JTF_adresse1,
 		JTF_adresse2,
 		JTF_cp,
-		JTF_ville;
+		JTF_ville,
+		JTF_numTel,
+		JTF_assurance,
+		JTF_email,
+		JTF_remarque;
 	
 	public JP_Client(){
 		
 		Dimension D_colonneGauche = new Dimension(100, 27);
 		Dimension D_colonneDroite = new Dimension(300, 27);
 		
-		JL_code = new JLabel("Code");
-		JL_code.setPreferredSize(D_colonneGauche);
-		
-		JTF_code = new JTextField();
-		JTF_code.setPreferredSize(D_colonneDroite);
-		
+
+	
 		JL_nom = new JLabel("Nom");
 		JL_nom.setPreferredSize(D_colonneGauche);
 		
@@ -70,14 +76,38 @@ public class JP_Client extends JPanel{
 		JTF_ville = new JTextField();
 		JTF_ville.setPreferredSize(D_colonneDroite);
 		
+		JL_numTel = new JLabel("Numéro");
+		JL_numTel.setPreferredSize(D_colonneGauche);
+		
+		JTF_numTel = new JTextField();
+		JTF_numTel.setPreferredSize(D_colonneDroite);
+		
+		JL_assurance = new JLabel("Assurance");
+		JL_assurance.setPreferredSize(D_colonneGauche);
+		
+		JTF_assurance = new JTextField();
+		JTF_assurance.setPreferredSize(D_colonneDroite);
+		
+		JL_email = new JLabel("Email");
+		JL_email.setPreferredSize(D_colonneGauche);
+		
+		JTF_email = new JTextField();
+		JTF_email.setPreferredSize(D_colonneDroite);
+		
+		JL_remarque = new JLabel("Remarque");
+		JL_remarque.setPreferredSize(D_colonneGauche);
+		
+		JTF_remarque = new JTextField();
+		JTF_remarque.setPreferredSize(D_colonneDroite);
+		
+		
 		setLayout(new GridBagLayout());
 		GridBagConstraints GBC_grille = new GridBagConstraints();
 		
-		GBC_grille.gridx = 0;
-		GBC_grille.gridy = 0;
-		add(JL_code, GBC_grille);
-		GBC_grille.gridx = 1;
-		add(JTF_code, GBC_grille);
+		
+		
+
+
 		GBC_grille.gridx = 0;
 		GBC_grille.gridy = 1;
 		add(JL_nom, GBC_grille);
@@ -106,6 +136,34 @@ public class JP_Client extends JPanel{
 		add(JL_ville, GBC_grille);
 		GBC_grille.gridx = 1;
 		add(JTF_ville, GBC_grille);
+		GBC_grille.gridx = 0;
+		GBC_grille.gridy = 7;
+		add(JL_numTel, GBC_grille);
+		GBC_grille.gridx = 1;
+		add(JTF_numTel, GBC_grille);
+		GBC_grille.gridx = 0;
+		GBC_grille.gridy = 8;
+		add(JL_assurance, GBC_grille);
+		GBC_grille.gridx = 1;
+		add(JTF_assurance, GBC_grille);		
+		GBC_grille.gridx = 0;
+		GBC_grille.gridy = 9;
+		add(JL_email, GBC_grille);
+		GBC_grille.gridx = 1;
+		add(JTF_email, GBC_grille);
+		GBC_grille.gridx = 0;
+		GBC_grille.gridy = 10;
+		add(JL_remarque, GBC_grille);
+		GBC_grille.gridx = 1;
+		add(JTF_remarque, GBC_grille);
 			
+	}
+	
+	public Clients getInputClient() {
+		
+		Clients addClient = new Clients(JTF_nom.getText(), JTF_prenom.getText(), JTF_adresse1.getText(), JTF_adresse2.getText(), 
+				JTF_cp.getText(), JTF_ville.getText(), JTF_numTel.getText(), JTF_assurance.getText(), JTF_email.getText(), JTF_remarque.getText());
+		
+		return addClient;
 	}
 }

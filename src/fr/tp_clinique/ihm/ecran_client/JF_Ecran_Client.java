@@ -9,12 +9,13 @@ public class JF_Ecran_Client extends JFrame{
 
 	private static final long serialVersionUID = 1L;
 	JPanel JP_panel;
+	public JP_Client client = new JP_Client();
 	
 	public JF_Ecran_Client(){
 		
 		JP_panel = new JPanel();
 		JP_panel.add(new JP_ToolBar());
-		JP_panel.add(new JP_Client());
+		JP_panel.add(client);
 		JP_panel.add(new JP_Animaux());
 		
 		add(JP_panel);

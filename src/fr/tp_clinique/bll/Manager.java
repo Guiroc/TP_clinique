@@ -2,8 +2,10 @@ package fr.tp_clinique.bll;
 
 import java.util.ArrayList;
 
+import fr.tp_clinique.bo.Clients;
 import fr.tp_clinique.bo.Personnels;
 import fr.tp_clinique.dal.ClientDAO;
+import fr.tp_clinique.dal.DALException;
 import fr.tp_clinique.dal.DAOFactory;
 import fr.tp_clinique.dal.PersonnelsDAO;
 import fr.tp_clinique.ihm.agenda.JF_Agenda;
@@ -20,6 +22,7 @@ public class Manager {
 	
 	private JF_Connexion fenetreConnexion;
 	private static Personnels unePersonne;
+	JF_Ecran_Client fenetreAddClient;
 
 		private Manager(){
 			unePersonne = null;
@@ -61,7 +64,7 @@ public class Manager {
 				//veterinaire
 				case "vet":
 					fenetreConnexion.dispose();
-					new JF_Ecran_Client();
+					fenetreAddClient = new JF_Ecran_Client();
 					break;
 				//secrétaire
 				case "sec":
@@ -81,5 +84,18 @@ public class Manager {
 		public ArrayList<Personnels> getNotArchivePersonnels() {
 			// TODO Auto-generated method stub
 			return personnelsDAO.getNotArchivePersonnels();
+		}
+		
+		
+		public void addClient() {
+			
+			try {
+				clientDAO.insert(fenetreAddClient.client.getInputClient());
+				
+			} catch (DALException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 }

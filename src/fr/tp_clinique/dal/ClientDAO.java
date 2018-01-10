@@ -50,7 +50,7 @@ public class ClientDAO {
 			rqt.setString(8, c.getAssurance());
 			rqt.setString(9, c.getEmail());
 			rqt.setString(10, c.getRemarque());
-			rqt.setBoolean(11, c.getArchive());
+			rqt.setBoolean(11, false);
 			
 			int nbRows = rqt.executeUpdate();
 			if(nbRows == 1){
@@ -62,7 +62,8 @@ public class ClientDAO {
 			}
 		}
 		catch(SQLException e){
-			throw new DALException("Insert clients failed - " + c, e);
+//			throw new DALException("Insert clients failed - " + c, e);
+			e.printStackTrace();
 		}
 	
 		
