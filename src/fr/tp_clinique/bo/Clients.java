@@ -35,6 +35,24 @@ public class Clients {
 		this.Archive = false;
 		this.lesAnimaux = new ArrayList<Animaux>();
 	}
+	
+	public Clients(String client, String prenomClient,
+			String adresse1, String adresse2, String codePostal, String ville,
+			String numTel, String assurance, String email, String remarque) {
+		
+		
+		this.Client = client;
+		this.PrenomClient = prenomClient;
+		this.Adresse1 = adresse1;
+		this.Adresse2 = adresse2;
+		this.CodePostal = codePostal;
+		this.Ville = ville;
+		this.NumTel = numTel;
+		this.Assurance = assurance;
+		this.Email = email;
+		this.Remarque = remarque;
+		this.lesAnimaux = new ArrayList<Animaux>();
+	}
 
 	public int getCodeClient() {
 		return CodeClient;
