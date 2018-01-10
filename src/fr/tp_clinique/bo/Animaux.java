@@ -14,11 +14,11 @@ public class Animaux {
 	Boolean Archive;
 	
 	
-	public Animaux(int codeAnimal, String nomAnimal, String sexe,
+	public Animaux(String nomAnimal, String sexe,
 			String couleur, String race, String espece, int codeClient,
 			String tatouage, String antecedents) {
 		super();
-		this.CodeAnimal = codeAnimal;
+
 		this.NomAnimal = nomAnimal;
 		this.Sexe = sexe;
 		this.Couleur = couleur;
@@ -31,8 +31,32 @@ public class Animaux {
 	}
 
 
+	public Animaux(int codeAnimal, String nomAnimal, String sexe, String couleur,
+			String race, String espece, int codeClient, String tatouage,
+			String antecedents, boolean archive) {
+		
+		// TODO Auto-generated constructor stub
+		super();
+
+		this.CodeAnimal = codeAnimal;
+		this.NomAnimal = nomAnimal;
+		this.Sexe = sexe;
+		this.Couleur = couleur;
+		this.Race = race;
+		this.Espece = espece;
+		this.CodeClient = codeClient;
+		this.Tatouage = tatouage; 
+		this.Antecedents = antecedents;
+		this.Archive = archive;
+	}
+
+
 	public int getCodeAnimal() {
 		return CodeAnimal;
+	}
+	
+	public void setCodeAnimal(int codeAnimal) {
+		CodeAnimal = codeAnimal;
 	}
 
 	public String getNomAnimal() {

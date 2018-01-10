@@ -1,6 +1,8 @@
 import javax.swing.SwingUtilities;
 
+import fr.tp_clinique.bo.Animaux;
 import fr.tp_clinique.bo.Clients;
+import fr.tp_clinique.dal.AnimauxDAO;
 import fr.tp_clinique.dal.ClientDAO;
 import fr.tp_clinique.dal.DALException;
 import fr.tp_clinique.ihm.rdv.JF_RDV;
@@ -14,26 +16,25 @@ public class AppliRun {
 			
 			public void run(){
 				
-				Clients c = new Clients(1, "a", "b", "c", "d", "e", "f", "g", "h", "i", "f");
-				ClientDAO insertClient = new ClientDAO();
+
+			
+			
+				AnimauxDAO insertAnimal = new AnimauxDAO();
+				
 				try {
-					insertClient.insert(c);
+					Animaux animal = insertAnimal.selectById(3);
+					animal.setCouleur("NOIRRR");
+					insertAnimal.update(animal);
+					insertAnimal.selectAll();
 				} catch (DALException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+
+
 			}
 		});
 		
-		
-		
-		//new JF_Connexion();
-		//new JF_Ecran_Animaux();
-		//new JF_Gestion_Personnel();
-		//new JF_Agenda();
-		//new JF_Ecran_Client();
-		//new JF_Ecran_Animaux();
-		new JF_RDV();
 	}
 
 }
