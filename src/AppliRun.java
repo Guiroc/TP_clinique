@@ -15,6 +15,7 @@ import fr.tp_clinique.dal.DALException;
 import fr.tp_clinique.ihm.rdv.JF_RDV;
 import fr.tp_clinique.bll.Manager;
 import fr.tp_clinique.ihm.connexion.JF_Connexion;
+import fr.tp_clinique.ihm.ecran_client.JF_Ecran_Client;
 
 
 
@@ -24,25 +25,16 @@ public class AppliRun {
 		
 		Manager controler = Manager.getInstance();
 		// TODO Auto-generated method stub
-		/*SwingUtilities.invokeLater(new Runnable(){
+		SwingUtilities.invokeLater(new Runnable(){
 			
 			public void run(){
 				
 			
-				AgendaDAO insertRdv = new AgendaDAO();
-				java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-				Agendas agenda = new Agendas(7,date,3);
-				
-				try {
-					insertRdv.delete(agenda);
-				} catch (DALException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+	
 
 
 			}
-		});*/
+		});
 		
 		
 		//new JF_Ecran_Animaux();

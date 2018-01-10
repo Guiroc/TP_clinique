@@ -2,12 +2,17 @@ package fr.tp_clinique.ihm.ecran_client;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import fr.tp_clinique.bll.Manager;
+import fr.tp_clinique.bo.Clients;
 
 public class JP_ToolBar extends JPanel{
 
@@ -36,6 +41,21 @@ public class JP_ToolBar extends JPanel{
 		JL_espace1.setPreferredSize(new Dimension(100,0));
 		
 		JB_ajouter = new JButton("Ajouter");
+		
+		
+		// Ajouter un Client
+		JB_ajouter.addActionListener(new ActionListener() {
+
+
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				Manager controler = Manager.getInstance();
+				controler.addClient();
+			}
+		});
+		
 		JB_supprimer = new JButton("Supprimer");
 		
 		JL_espace2 = new JLabel("");
