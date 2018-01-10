@@ -4,12 +4,16 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import fr.tp_clinique.bll.Manager;
 
 public class JP_Login extends JPanel {
 	
@@ -35,6 +39,15 @@ public class JP_Login extends JPanel {
 		
 		JButton JB_button = new JButton("Valider");
 		JB_button.setPreferredSize(new Dimension(75,25));
+		JB_button.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				Manager controler = Manager.getInstance();
+				controler.Connexion(JT_input.getText(), JP_user.getPassword());
+			}
+		});
 		
 		gbc.gridx = 0;
 		gbc.gridy = 0;
