@@ -58,5 +58,6 @@ public class TableListPersonnels extends AbstractTableModel {
 	public int getColumnCount() {
 		return 3; // le nombre de colonnes
 	}
+	
  
 }
