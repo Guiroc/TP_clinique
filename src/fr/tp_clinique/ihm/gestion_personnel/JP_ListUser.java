@@ -5,11 +5,18 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
+import fr.tp_clinique.bll.Manager;
+import fr.tp_clinique.bll.TableListPersonnels;
+import fr.tp_clinique.bo.Personnels;
 
 public class JP_ListUser extends JPanel {
 	
@@ -17,7 +24,7 @@ public class JP_ListUser extends JPanel {
 	
 	public JP_ListUser() {
 		
-		this.setLayout(new GridBagLayout());
+		/*this.setLayout(new GridBagLayout());
 		gbc.insets = new Insets(20, 20, 20, 20);
 		
 		
@@ -47,7 +54,19 @@ public class JP_ListUser extends JPanel {
 		JP_Password.setPreferredSize(new Dimension(25,25));
 		gbc.gridx = 6;
 		gbc.gridy = 0;
-		add(JP_Password, gbc);
+		add(JP_Password, gbc);*/
+		Manager controler = Manager.getInstance();
+		
+		String[] entete = {"Nom", "Prénom", "Rôle", "Mot de passe"};
+		
+		ArrayList<Personnels> desPersonnels = controler.getNotArchivePersonnels();
+		JTable JT_listPersonnels = new JTable(new TableListPersonnels(desPersonnels));
+		
+		
+		JScrollPane JSP_pane = new JScrollPane(JT_listPersonnels);
+		JSP_pane.setPreferredSize(new Dimension(750, 500));
+		
+		add(JSP_pane);
 		
 		setBorder(BorderFactory.createLineBorder(Color.black, 1));	
 		

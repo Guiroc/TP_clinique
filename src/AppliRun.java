@@ -6,13 +6,18 @@ import fr.tp_clinique.dal.AnimauxDAO;
 import fr.tp_clinique.dal.ClientDAO;
 import fr.tp_clinique.dal.DALException;
 import fr.tp_clinique.ihm.rdv.JF_RDV;
+import fr.tp_clinique.bll.Manager;
+import fr.tp_clinique.ihm.connexion.JF_Connexion;
+
 
 
 public class AppliRun {
 
 	public static void main(String[] args) {
+		
+		Manager controler = Manager.getInstance();
 		// TODO Auto-generated method stub
-		SwingUtilities.invokeLater(new Runnable(){
+		/*SwingUtilities.invokeLater(new Runnable(){
 			
 			public void run(){
 				
@@ -33,8 +38,15 @@ public class AppliRun {
 
 
 			}
-		});
+		});*/
 		
+		
+		//new JF_Ecran_Animaux();
+		//new JF_Gestion_Personnel();
+		//new JF_Agenda();
+		//new JF_Ecran_Client();
+		//new JF_Ecran_Animaux();
+		//new JF_RDV();
 	}
 
 }
