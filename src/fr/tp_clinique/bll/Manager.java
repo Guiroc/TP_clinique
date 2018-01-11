@@ -1,5 +1,6 @@
 package fr.tp_clinique.bll;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import fr.tp_clinique.bo.Clients;
@@ -8,7 +9,9 @@ import fr.tp_clinique.dal.ClientDAO;
 import fr.tp_clinique.dal.DALException;
 import fr.tp_clinique.dal.DAOFactory;
 import fr.tp_clinique.dal.PersonnelsDAO;
+import fr.tp_clinique.dal.jdbc.JdbcTools;
 import fr.tp_clinique.ihm.agenda.JF_Agenda;
+import fr.tp_clinique.ihm.ajout_personnels.JF_Ajout_Personnels;
 import fr.tp_clinique.ihm.connexion.JF_Connexion;
 import fr.tp_clinique.ihm.ecran_client.JF_Ecran_Client;
 import fr.tp_clinique.ihm.gestion_personnel.JF_Gestion_Personnel;
@@ -21,6 +24,8 @@ public class Manager {
 	private PersonnelsDAO personnelsDAO;
 	
 	private JF_Connexion fenetreConnexion;
+	private JF_Gestion_Personnel fenetreGestionPersonnels;
+	
 	private static Personnels unePersonne;
 	JF_Ecran_Client fenetreAddClient;
 
@@ -28,6 +33,12 @@ public class Manager {
 			unePersonne = null;
 			personnelsDAO = DAOFactory.getPersonnelsDAO();
 			clientDAO = DAOFactory.getClientDAO();
+			try {
+				JdbcTools.getConnection();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			run();
 		}
 		
@@ -53,13 +64,13 @@ public class Manager {
 			
 			if(unePersonne != null){
 					
-				this.unePersonne = unePersonne;
+				Manager.unePersonne = unePersonne;
 				switch (unePersonne.getRole()){
 				
 				//admin
 				case "adm":
 					fenetreConnexion.dispose();
-					new JF_Gestion_Personnel();
+					fenetreGestionPersonnels = new JF_Gestion_Personnel();
 					break;
 				//veterinaire
 				case "vet":
@@ -85,6 +96,7 @@ public class Manager {
 			// TODO Auto-generated method stub
 			return personnelsDAO.getNotArchivePersonnels();
 		}
+
 		
 		
 		public void addClient() {
@@ -96,6 +108,23 @@ public class Manager {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+
+
+		public void deletePersonnelsById() {
+			// TODO Auto-generated method stub
+			personnelsDAO.DeletePersonnelsById(fenetreGestionPersonnels.getSelectedItem_JT_listPersonnels().getCodePers());
+		}
+
+		public void ajouterPersonnels() {
+			// TODO Auto-generated method stub
+			new JF_Ajout_Personnels();
+		}
+
+		public void enregistrerPersonnnel(Personnels personnels) {
+			// TODO Auto-generated method stub
+			personnelsDAO.addPersonnel(personnels);
+
 			
 		}
 }

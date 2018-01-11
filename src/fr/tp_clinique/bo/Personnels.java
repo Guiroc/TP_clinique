@@ -26,6 +26,14 @@ public class Personnels {
 			this.archive = archive;
 		}
 
+		public Personnels(String nom, String role, String motPasse) {
+			// TODO Auto-generated constructor stub
+			this.nom = nom;
+			this.motPasse = motPasse;
+			this.role = role;
+			this.archive = false;
+		}
+
 		public int getCodePers() {
 			return codePers;
 		}

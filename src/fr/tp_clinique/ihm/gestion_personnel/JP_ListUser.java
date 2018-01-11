@@ -3,14 +3,10 @@ package fr.tp_clinique.ihm.gestion_personnel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
@@ -19,8 +15,11 @@ import fr.tp_clinique.bll.TableListPersonnels;
 import fr.tp_clinique.bo.Personnels;
 
 public class JP_ListUser extends JPanel {
-	
+
+	private static final long serialVersionUID = 1L;
 	GridBagConstraints gbc = new GridBagConstraints();
+	JTable JT_listPersonnels;
+	ArrayList<Personnels> desPersonnels;
 	
 	public JP_ListUser() {
 		
@@ -57,10 +56,8 @@ public class JP_ListUser extends JPanel {
 		add(JP_Password, gbc);*/
 		Manager controler = Manager.getInstance();
 		
-		String[] entete = {"Nom", "Prénom", "Rôle", "Mot de passe"};
-		
-		ArrayList<Personnels> desPersonnels = controler.getNotArchivePersonnels();
-		JTable JT_listPersonnels = new JTable(new TableListPersonnels(desPersonnels));
+		desPersonnels = controler.getNotArchivePersonnels();
+		JT_listPersonnels = new JTable(new TableListPersonnels(desPersonnels));
 		
 		
 		JScrollPane JSP_pane = new JScrollPane(JT_listPersonnels);
@@ -70,6 +67,10 @@ public class JP_ListUser extends JPanel {
 		
 		setBorder(BorderFactory.createLineBorder(Color.black, 1));	
 		
+	}
+	
+	public Personnels getSelectedItem_JT_listPersonnels(){
+		return desPersonnels.get(JT_listPersonnels.getSelectedRow());
 	}
 
 }

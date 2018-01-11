@@ -7,6 +7,7 @@ import fr.tp_clinique.bo.Personnels;
 
 public class TableListPersonnels extends AbstractTableModel {
  
+	private static final long serialVersionUID = 1L;
 	private ArrayList<Personnels> list;
  
 	public TableListPersonnels(ArrayList<Personnels> list) {
@@ -27,7 +28,7 @@ public class TableListPersonnels extends AbstractTableModel {
 				return personnels.getRole();
 			}
 			case 2: {
-				return personnels.getMotPasse();
+				return "********";
 			}
 		}
 		return null;
