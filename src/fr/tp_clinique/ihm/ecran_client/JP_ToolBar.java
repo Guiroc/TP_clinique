@@ -65,6 +65,43 @@ public class JP_ToolBar extends JPanel{
 		JTF_rechercher.setPreferredSize(new Dimension(120, 27));
 		JB_rechercher = new JButton("Rechercher");
 		
+		
+		JB_premier.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				Manager controler = Manager.getInstance();
+				controler.display(0);
+			}
+
+		});
+		
+		JB_dernier.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				Manager controler = Manager.getInstance();
+				controler.display(-2);
+			}
+
+		});
+		
+		JB_precedent.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				Manager controler = Manager.getInstance();
+				controler.display(-1);
+			}
+
+		});
+		
+		JB_suivant.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				Manager controler = Manager.getInstance();
+				controler.display(1);
+			}
+
+		});	
+		
 		add(JB_premier);
 		add(JB_precedent);
 		add(JB_suivant);
@@ -78,4 +115,9 @@ public class JP_ToolBar extends JPanel{
 		
 		setBorder(BorderFactory.createLineBorder(Color.black, 1));
 	}
+	
+	
+		
+		
+	
 }

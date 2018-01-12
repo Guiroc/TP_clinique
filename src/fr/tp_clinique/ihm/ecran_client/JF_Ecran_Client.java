@@ -10,6 +10,7 @@ public class JF_Ecran_Client extends JFrame{
 	private static final long serialVersionUID = 1L;
 	JPanel JP_panel;
 	public JP_Client client = new JP_Client();
+	public JP_Animaux animal = new JP_Animaux();
 	
 	public JF_Ecran_Client(){
 		

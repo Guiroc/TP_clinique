@@ -3,12 +3,15 @@ package fr.tp_clinique.ihm.ecran_client;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import fr.tp_clinique.bo.Clients;
+import fr.tp_clinique.dal.ClientDAO;
+import fr.tp_clinique.dal.DALException;
 
 public class JP_Client extends JPanel{
 
@@ -41,7 +44,8 @@ public class JP_Client extends JPanel{
 		Dimension D_colonneGauche = new Dimension(100, 27);
 		Dimension D_colonneDroite = new Dimension(300, 27);
 		
-
+		
+		
 	
 		JL_nom = new JLabel("Nom");
 		JL_nom.setPreferredSize(D_colonneGauche);
@@ -166,4 +170,23 @@ public class JP_Client extends JPanel{
 		
 		return addClient;
 	}
+	
+	public void displayClient(Clients client) {
+		
+		JTF_nom.setText(client.getClient());
+		JTF_prenom.setText(client.getPrenomClient());
+		JTF_adresse1.setText(client.getAdresse1());
+		JTF_adresse2.setText(client.getAdresse2());
+		JTF_cp.setText(client.getCodePostal());
+		JTF_ville.setText(client.getVille());
+		JTF_numTel.setText(client.getNumTel());
+		JTF_assurance.setText(client.getAssurance());
+		JTF_email.setText(client.getEmail());
+		JTF_remarque.setText(client.getRemarque());
+		
+	}
+	
+
+	
+	
 }
