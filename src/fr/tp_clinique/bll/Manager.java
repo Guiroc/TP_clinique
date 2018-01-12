@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.tp_clinique.bo.Animaux;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+
 import fr.tp_clinique.bo.Clients;
 import fr.tp_clinique.bo.Personnels;
 import fr.tp_clinique.dal.AnimauxDAO;
@@ -14,10 +17,12 @@ import fr.tp_clinique.dal.DAOFactory;
 import fr.tp_clinique.dal.PersonnelsDAO;
 import fr.tp_clinique.dal.jdbc.JdbcTools;
 import fr.tp_clinique.ihm.agenda.JF_Agenda;
-import fr.tp_clinique.ihm.ajout_personnels.JF_Ajout_Personnels;
 import fr.tp_clinique.ihm.connexion.JF_Connexion;
+import fr.tp_clinique.ihm.dialog.JD_Information;
 import fr.tp_clinique.ihm.ecran_client.JF_Ecran_Client;
+import fr.tp_clinique.ihm.gestion_personnel.JF_Ajout_Personnels;
 import fr.tp_clinique.ihm.gestion_personnel.JF_Gestion_Personnel;
+import fr.tp_clinique.ihm.gestion_personnel.JF_Modifier_MDP;
 
 public class Manager {
 	
@@ -29,11 +34,15 @@ public class Manager {
 	
 	private JF_Connexion fenetreConnexion;
 	private JF_Gestion_Personnel fenetreGestionPersonnels;
+
 	private int positionClient = 0;
 	private List<Clients> listClient;
-	
+
+	private JF_Ecran_Client fenetreAddClient;
+	private JF_Ajout_Personnels fenetreAjoutPersonnels;
+	private JF_Modifier_MDP fenetreModifierMdp;
+
 	private static Personnels unePersonne;
-	JF_Ecran_Client fenetreAddClient;
 
 		private Manager(){
 			
@@ -106,7 +115,8 @@ public class Manager {
 				}
 			}
 			else{
-				
+				String[] texte = {"Le nom ou le mot de passe est incorrect."};
+				new JD_Information(texte);
 			}
 		}
 
@@ -117,20 +127,122 @@ public class Manager {
 
 		public void deletePersonnelsById() {
 			// TODO Auto-generated method stub
-			personnelsDAO.DeletePersonnelsById(fenetreGestionPersonnels.getSelectedItem_JT_listPersonnels().getCodePers());
+			Personnels personnel = fenetreGestionPersonnels.getSelectedItem_JT_listPersonnels();
+			if(personnel == null){
+				String[] texte = {"Veuillez selectionner un utilisateur."};
+				new JD_Information(texte);
+			}
+			else{
+				int rs = personnelsDAO.DeletePersonnelsById(personnel.getCodePers());
+				
+				if(rs > 0){
+					String[] texte = {"L'utilisateur a été supprimer."};
+					new JD_Information(texte);
+					fenetreGestionPersonnels.updateJTable();
+				}
+				else{
+					String[] texte = {"L'utilisateur n'a pas pu être supprimé."};
+					new JD_Information(texte);
+				}
+			}
 		}
 
-		public void ajouterPersonnels() {
-			// TODO Auto-generated method stub
-			new JF_Ajout_Personnels();
+		public void ouvrirJP_Ajout_Personnels(){
+			
+			fenetreAjoutPersonnels = new JF_Ajout_Personnels();
+		}
+		
+		public void ouvrirJP_Modifer_MDP(){
+			Personnels personnel = fenetreGestionPersonnels.getSelectedItem_JT_listPersonnels();
+			if(personnel == null){
+				String[] texte = {"Veuillez selectionner un utilisateur."};
+				new JD_Information(texte);
+			}
+			else{
+				fenetreModifierMdp = new JF_Modifier_MDP();
+			}
+		}
+		public void modifierMdp(String mdp){
+			
+			Personnels personnel = fenetreGestionPersonnels.getSelectedItem_JT_listPersonnels();
+			String[] message = {"", ""};
+			Boolean verif = true;
+			
+			if(mdp.length() < 6){
+				verif = false;	
+				message[0] = "Il faut un mot de passe d'un minimum de 6 caratères.";
+			}
+			else{
+				if(personnel.getMotPasse().equals(mdp)){
+					verif = false;	
+					message[1] = "Le nouveau mot de passe ne peut pas être le même que l'ancien.";
+				}
+			}
+		
+			if(verif){	
+				fenetreModifierMdp.dispose();
+				int rs = personnelsDAO.UpdateMdpById(personnel.getCodePers(), mdp);
+				
+				if(rs > 0){
+					String[] texte = {"Le mot de passe a été modifier."};
+					fenetreGestionPersonnels.updateJTable();
+					new JD_Information(texte);	
+				}
+				else{
+					String[] texte = {"Le mot de passe n'a pas été modifer."};
+					new JD_Information(texte);
+				}
+			}
+			else{
+				new JD_Information(message);
+			}
 		}
 
 		public void enregistrerPersonnnel(Personnels personnels) {
 			// TODO Auto-generated method stub
+
 			personnelsDAO.addPersonnel(personnels);
+
+
+			String[] message = {"", "", ""};
+			Boolean verif = true;
+			
+			if(personnels.getNom().length() == 0){
+				verif = false;	
+				message[0] = "Il faut un nom.";
+			}
+			else{
+				if(personnelsDAO.getNbPersonnelsByName(personnels.getNom()) > 0){
+					verif = false;	
+					message[2] = "Cet utilisateur existe déjâ.";
+				}
+			}
+			if(personnels.getMotPasse().length() < 6){
+				verif = false;	
+				message[1] = "Il faut un mot de passe d'un min de 6 caratères.";
+			}
+		
+			if(verif){
+				fenetreAjoutPersonnels.dispose();
+			
+				int rs = personnelsDAO.addPersonnel(personnels);
+				if(rs > 0){
+					String[] texte = {"L'utilisateur a été ajouter."};
+					fenetreGestionPersonnels.updateJTable();
+					new JD_Information(texte);
+				}
+				else{
+					String[] texte = {"L'utilisateur n'a pas pu être ajouté."};
+					new JD_Information(texte);
+				}
+			}
+			else{
+				new JD_Information(message);
+			}
 
 		}
 		
+
 		// Ajoute un client	
 		public void addClient() {
 			try {

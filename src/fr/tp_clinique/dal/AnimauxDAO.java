@@ -34,6 +34,7 @@ public class AnimauxDAO {
 		
 		Connection cnx = null;
 		PreparedStatement rqt = null;
+		ResultSet rs = null;
 		
 		try {
 
@@ -52,7 +53,7 @@ public class AnimauxDAO {
 			int nbRows = rqt.executeUpdate();
 			
 			if(nbRows == 1){
-				ResultSet rs = rqt.getGeneratedKeys();
+				rs = rqt.getGeneratedKeys();
 				if(rs.next()){
 					animal.setCodeAnimal(rs.getInt(1));
 				}
@@ -61,6 +62,22 @@ public class AnimauxDAO {
 		}
 		catch(SQLException e){
 			throw new DALException("Insert animal failed - " + animal, e);
+		}
+		finally {
+			try {
+				if (rs != null){
+					rs.close();
+				}
+				if (rqt != null){
+					rqt.close();
+				}
+				if(cnx!=null){
+					cnx.close();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	
 		
