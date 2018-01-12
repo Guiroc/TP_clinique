@@ -3,6 +3,7 @@ package fr.tp_clinique.ihm.ecran_client;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JLabel;
@@ -12,6 +13,7 @@ import javax.swing.JTextField;
 import fr.tp_clinique.bo.Clients;
 import fr.tp_clinique.dal.ClientDAO;
 import fr.tp_clinique.dal.DALException;
+import fr.tp_clinique.dal.DAOFactory;
 
 public class JP_Client extends JPanel{
 
@@ -39,10 +41,17 @@ public class JP_Client extends JPanel{
 		JTF_email,
 		JTF_remarque;
 	
+	ClientDAO clientDAO = DAOFactory.getClientDAO();
+	
 	public JP_Client(){
 		
 		Dimension D_colonneGauche = new Dimension(100, 27);
 		Dimension D_colonneDroite = new Dimension(300, 27);
+		
+		
+		
+		
+
 		
 		
 		
@@ -160,6 +169,17 @@ public class JP_Client extends JPanel{
 		add(JL_remarque, GBC_grille);
 		GBC_grille.gridx = 1;
 		add(JTF_remarque, GBC_grille);
+		
+		List<Clients> client = new ArrayList<Clients>();
+
+		try {
+			client = clientDAO.selectAll();
+			System.out.println(client);
+			displayClient(client.get(0));
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 			
 	}
 	
