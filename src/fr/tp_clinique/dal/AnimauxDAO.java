@@ -17,8 +17,8 @@ public class AnimauxDAO {
 	private static final String sqlSelectById = "SELECT CodeAnimal, NomAnimal, Sexe, Couleur, Race, Espece, CodeClient, Tatouage, Antecedents,Archive "
 			+ "FROM dbo.Animaux WHERE CodeAnimal = ?";
 	
-	private static final String sqlSelectAll = "SELECT CodeAnimal, NomAnimal, Sexe, Couleur, Race, Espece, CodeClient, Tatouage, Antecedents,Archive "
-			+ "FROM dbo.Animaux";
+	private static final String selectAllByClient = "SELECT CodeAnimal, NomAnimal, Sexe, Couleur, Race, Espece, CodeClient, Tatouage, Antecedents,Archive "
+			+ "FROM dbo.Animaux WHERE CodeClient =?";
 	
 	private static final String sqlUpdate = "update dbo.Animaux set NomAnimal=?,Sexe=?,Couleur=?,Race=?,Espece=?,CodeClient=?,Tatouage=?,"
 			+ "Antecedents=?,Archive=? where CodeAnimal=?";
@@ -164,6 +164,7 @@ public class AnimauxDAO {
 			rqt = cnx.prepareStatement(sqlDelete);
 			rqt.setInt(1, id);
 			rqt.executeUpdate();
+			
 		}catch (SQLException e) {
 			throw new DALException("Delete animal failed - id=" + id, e);
 		} finally {
@@ -180,21 +181,22 @@ public class AnimauxDAO {
 		}
 	}
 
-	public List<Animaux> selectAll() throws DALException {
+	public ArrayList<Animaux> selectAllByClient(int id) throws DALException {
 		
 		Connection cnx = null;
-		Statement rqt = null;
+		PreparedStatement rqt = null;
 		ResultSet rs = null;
-		List<Animaux> liste = new ArrayList<Animaux>();
-		
-		try {
+		ArrayList<Animaux> liste = new ArrayList<Animaux>();
+		try {		
 			cnx = JdbcTools.getConnection();
-			rqt = cnx.createStatement();
-			rs = rqt.executeQuery(sqlSelectAll);
-			Animaux animal = null;
+			rqt = cnx.prepareStatement(selectAllByClient);
+			rqt.setInt(1, id);
+			rs = rqt.executeQuery();
+			
+			
 			
 			while (rs.next()) {
-
+				Animaux animal = null;
 				animal = new Animaux(rs.getInt("CodeAnimal"),
 						rs.getString("NomAnimal"),
 						rs.getString("Sexe"),
@@ -209,6 +211,7 @@ public class AnimauxDAO {
 				liste.add(animal);
 			}
 		}catch (SQLException e) {
+			e.printStackTrace();
 			throw new DALException("selectAll Animaux failed - " , e);
 		} finally {
 			try {
@@ -226,7 +229,7 @@ public class AnimauxDAO {
 				e.printStackTrace();
 			}
 		}
-		System.out.println(liste);
+		//System.out.println(liste);
 		return liste;
 	}
 }

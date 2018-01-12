@@ -4,12 +4,18 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import fr.tp_clinique.bll.Manager;
+import fr.tp_clinique.bll.TableListAnimaux;
+import fr.tp_clinique.bll.TableListPersonnels;
+import fr.tp_clinique.bo.Animaux;
+import fr.tp_clinique.bo.Personnels;
 import fr.tp_clinique.ihm.ecran_animaux.JF_Ecran_Animaux;
 
 public class JP_Animaux extends JPanel{
@@ -20,15 +26,21 @@ public class JP_Animaux extends JPanel{
 		JB_editer;
 	
 	JTable JT_animaux;
+	TableListAnimaux updateAnimaux;
+	JScrollPane JSP_listAnimaux;
+	JPanel JP_toolBarAnimaux;
+	
+	ArrayList<Animaux> desAnimaux = new ArrayList<Animaux>();
 	
 	public JP_Animaux(){
-		
-		String[] entetes = {"Numero", "Nom", "Sexe", "Couleur", "Race", "Espèce", "Tatouage"};
-		Object[][] donnees = {};
-		JT_animaux = new JTable(donnees, entetes);
-		
-		JScrollPane JSP_listAnimaux = new JScrollPane(JT_animaux);
-	
+
+		Manager controler = Manager.getInstance();
+
+		desAnimaux = controler.getListAnimaux();
+		updateAnimaux = new TableListAnimaux(desAnimaux);
+		JT_animaux = new JTable();
+		JT_animaux.setModel(updateAnimaux);
+		JSP_listAnimaux = new JScrollPane(JT_animaux);
 		
 		JB_ajouter = new JButton("Ajouter");
 		JB_ajouter.addActionListener(new ActionListener(){
@@ -44,7 +56,7 @@ public class JP_Animaux extends JPanel{
 		
 		JB_editer = new JButton("Editer");
 		
-		JPanel JP_toolBarAnimaux = new JPanel();
+		JP_toolBarAnimaux = new JPanel();
 		JP_toolBarAnimaux.add(JB_ajouter);
 		JP_toolBarAnimaux.add(JB_supprimer);
 		JP_toolBarAnimaux.add(JB_editer);
@@ -58,5 +70,16 @@ public class JP_Animaux extends JPanel{
 		GBC_grille.gridy = 1;
 		add(JP_toolBarAnimaux, GBC_grille);
 	
+	}
+	
+	public void updateJTable() {
+		Manager controler = Manager.getInstance();
+		desAnimaux = controler.getListAnimaux();
+		updateAnimaux = new TableListAnimaux(desAnimaux);
+		JT_animaux.setModel(updateAnimaux);
+		
+		String jT_a = JT_animaux.getValueAt(0, 0).toString();
+		
+		System.out.println(jT_a);
 	}
 }

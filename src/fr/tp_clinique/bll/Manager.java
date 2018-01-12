@@ -2,9 +2,12 @@ package fr.tp_clinique.bll;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
+import fr.tp_clinique.bo.Animaux;
 import fr.tp_clinique.bo.Clients;
 import fr.tp_clinique.bo.Personnels;
+import fr.tp_clinique.dal.AnimauxDAO;
 import fr.tp_clinique.dal.ClientDAO;
 import fr.tp_clinique.dal.DALException;
 import fr.tp_clinique.dal.DAOFactory;
@@ -22,24 +25,33 @@ public class Manager {
 	
 	private ClientDAO clientDAO;
 	private PersonnelsDAO personnelsDAO;
+	private AnimauxDAO animauxDAO;
 	
 	private JF_Connexion fenetreConnexion;
 	private JF_Gestion_Personnel fenetreGestionPersonnels;
+	private int positionClient = 0;
+	private List<Clients> listClient;
 	
 	private static Personnels unePersonne;
 	JF_Ecran_Client fenetreAddClient;
 
 		private Manager(){
+			
 			unePersonne = null;
 			personnelsDAO = DAOFactory.getPersonnelsDAO();
 			clientDAO = DAOFactory.getClientDAO();
+			animauxDAO = DAOFactory.getAnimauxDAO();
+			
+			
 			try {
 				JdbcTools.getConnection();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
 			run();
+			
 		}
 		
 		public static synchronized Manager getInstance(){
@@ -75,6 +87,12 @@ public class Manager {
 				//veterinaire
 				case "vet":
 					fenetreConnexion.dispose();
+					try {
+						listClient = clientDAO.selectAll();
+					} catch (DALException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					fenetreAddClient = new JF_Ecran_Client();
 					break;
 				//secrétaire
@@ -97,20 +115,6 @@ public class Manager {
 			return personnelsDAO.getNotArchivePersonnels();
 		}
 
-		
-		
-		public void addClient() {
-			
-			try {
-				clientDAO.insert(fenetreAddClient.client.getInputClient());
-				
-			} catch (DALException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-
-
 		public void deletePersonnelsById() {
 			// TODO Auto-generated method stub
 			personnelsDAO.DeletePersonnelsById(fenetreGestionPersonnels.getSelectedItem_JT_listPersonnels().getCodePers());
@@ -125,6 +129,70 @@ public class Manager {
 			// TODO Auto-generated method stub
 			personnelsDAO.addPersonnel(personnels);
 
-			
 		}
+		
+		// Ajoute un client	
+		public void addClient() {
+			try {
+				clientDAO.insert(fenetreAddClient.client.getInputClient());
+			} catch (DALException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		public ArrayList<Animaux> getListAnimaux() {
+			// TODO Auto-generated method stub
+			ArrayList<Animaux> desAnimaux = new ArrayList<Animaux>();
+			try {
+				
+				desAnimaux =  animauxDAO.selectAllByClient(listClient.get(positionClient).getCodeClient());
+			} catch (DALException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return desAnimaux;
+		}
+		
+
+		
+		//Affiche la liste des Clients et ses animaux
+		public void display(int id) {		
+			try {
+				listClient = clientDAO.selectAll();
+			
+					switch (id) {
+						case 0:
+							positionClient = 0;
+							break;
+				
+						case -2:
+							positionClient = listClient.size()-1;
+							break;
+					
+						case 1:
+							if(positionClient < listClient.size() -1) {
+								positionClient = positionClient +1;
+							}
+							break;
+					
+						case -1:
+							if(positionClient > 0) {
+								positionClient = positionClient -1;
+							}
+							break;
+						default:
+							break;
+					}
+					
+					fenetreAddClient.client.displayClient(listClient.get(positionClient));
+					fenetreAddClient.animal.updateJTable();
+
+			} catch (DALException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
 }

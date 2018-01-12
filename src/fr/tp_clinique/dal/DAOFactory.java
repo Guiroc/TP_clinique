@@ -36,4 +36,21 @@ public class DAOFactory {
 		}
 		return clientDAO; 
 	}
+	
+	public static AnimauxDAO getAnimauxDAO()  {
+		AnimauxDAO animauxDAO = null;
+		try {
+			animauxDAO = (AnimauxDAO) Class.forName("fr.tp_clinique.dal.AnimauxDAO").newInstance();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return animauxDAO; 
+	}
 }
