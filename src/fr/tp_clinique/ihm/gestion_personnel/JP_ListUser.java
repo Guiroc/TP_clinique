@@ -20,6 +20,8 @@ public class JP_ListUser extends JPanel {
 	GridBagConstraints gbc = new GridBagConstraints();
 	JTable JT_listPersonnels;
 	ArrayList<Personnels> desPersonnels;
+	JScrollPane JSP_pane;
+	TableListPersonnels TLP_modele;
 	
 	public JP_ListUser() {
 		
@@ -57,10 +59,11 @@ public class JP_ListUser extends JPanel {
 		Manager controler = Manager.getInstance();
 		
 		desPersonnels = controler.getNotArchivePersonnels();
-		JT_listPersonnels = new JTable(new TableListPersonnels(desPersonnels));
+		TLP_modele = new TableListPersonnels(desPersonnels);
+		JT_listPersonnels = new JTable(TLP_modele);
 		
 		
-		JScrollPane JSP_pane = new JScrollPane(JT_listPersonnels);
+		JSP_pane = new JScrollPane(JT_listPersonnels);
 		JSP_pane.setPreferredSize(new Dimension(750, 500));
 		
 		add(JSP_pane);
@@ -70,7 +73,18 @@ public class JP_ListUser extends JPanel {
 	}
 	
 	public Personnels getSelectedItem_JT_listPersonnels(){
-		return desPersonnels.get(JT_listPersonnels.getSelectedRow());
+		
+		if(JT_listPersonnels.getSelectedRow() != -1){
+			return desPersonnels.get(JT_listPersonnels.getSelectedRow());
+		}
+		return null;
+	}
+	
+	public void updateJTable(){
+		Manager controler = Manager.getInstance();
+		desPersonnels = controler.getNotArchivePersonnels();
+		TLP_modele.update(desPersonnels);
+		TLP_modele.fireTableDataChanged();
 	}
 
 }

@@ -52,4 +52,8 @@ public class JF_Gestion_Personnel extends JFrame{
 	public Personnels getSelectedItem_JT_listPersonnels(){
 		return panelListePersonnels.getSelectedItem_JT_listPersonnels();
 	}
+	
+	public void updateJTable(){
+		panelListePersonnels.updateJTable();
+	}
 }

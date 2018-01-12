@@ -25,10 +25,18 @@ public class TableListPersonnels extends AbstractTableModel {
 				return personnels.getNom();
 			}
 			case 1: {
-				return personnels.getRole();
+				switch(personnels.getRole()){
+				case "adm":
+					return "Administrateur";
+				case "vet":
+					return "Vétérinaire";
+				case "sec":
+					return "Secrétaire";
+				}
 			}
 			case 2: {
 				return "********";
+				//return personnels.getMotPasse();
 			}
 		}
 		return null;
@@ -58,6 +66,11 @@ public class TableListPersonnels extends AbstractTableModel {
 	@Override
 	public int getColumnCount() {
 		return 3; // le nombre de colonnes
+	}
+
+	public void update(ArrayList<Personnels> desPersonnels) {
+		// TODO Auto-generated method stub
+		this.list = desPersonnels;
 	}
 	
  

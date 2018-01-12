@@ -31,10 +31,6 @@ public class AppliRun {
 			
 			public void run(){
 				
-			
-	
-
-
 			}
 		});
 		

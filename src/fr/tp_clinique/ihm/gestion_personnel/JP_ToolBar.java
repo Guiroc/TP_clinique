@@ -14,7 +14,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import fr.tp_clinique.bll.Manager;
-import fr.tp_clinique.ihm.ajout_personnels.JF_Ajout_Personnels;
 
 public class JP_ToolBar extends JPanel {
 	
@@ -32,8 +31,8 @@ public class JP_ToolBar extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				new JF_Ajout_Personnels();
-			}
+				Manager controler = Manager.getInstance();
+				controler.ouvrirJP_Ajout_Personnels();			}
 		});
 		
 		gbc.gridx = 0;
@@ -56,7 +55,16 @@ public class JP_ToolBar extends JPanel {
 		add(JB_delete, gbc);
 		
 		JButton JB_re = new JButton("Réinitialiser");
-		JB_re.setPreferredSize(new Dimension(100,30));
+		JB_re.setPreferredSize(new Dimension(150,30));
+		JB_re.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				Manager controler = Manager.getInstance();
+				controler.ouvrirJP_Modifer_MDP();
+			}
+		});
 		
 		gbc.gridx = 6;
 		gbc.gridy = 0;
