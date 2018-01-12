@@ -17,7 +17,7 @@ public class JF_Ecran_Client extends JFrame{
 		JP_panel = new JPanel();
 		JP_panel.add(new JP_ToolBar());
 		JP_panel.add(client);
-		JP_panel.add(new JP_Animaux());
+		JP_panel.add(animal);
 		
 		add(JP_panel);
 		

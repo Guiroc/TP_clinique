@@ -14,6 +14,7 @@ public class TableListAnimaux extends AbstractTableModel {
 	 
 		public TableListAnimaux(ArrayList<Animaux> list) {
 			this.list = list;
+			System.out.println(list);
 		}
 	 
 		@Override

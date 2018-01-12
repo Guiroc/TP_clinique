@@ -75,11 +75,9 @@ public class JP_Animaux extends JPanel{
 	public void updateJTable() {
 		Manager controler = Manager.getInstance();
 		desAnimaux = controler.getListAnimaux();
-		updateAnimaux = new TableListAnimaux(desAnimaux);
-		JT_animaux.setModel(updateAnimaux);
+		updateAnimaux.update(desAnimaux);
+		updateAnimaux.fireTableDataChanged();
+
 		
-		String jT_a = JT_animaux.getValueAt(0, 0).toString();
-		
-		System.out.println(jT_a);
 	}
 }
