@@ -168,9 +168,9 @@ public class Manager {
 			String[] message = {"", ""};
 			Boolean verif = true;
 			
-			if(mdp.length() < 6){
+			if(mdp.length() < 6 || mdp.length() > 10){
 				verif = false;	
-				message[0] = "Il faut un mot de passe d'un minimum de 6 caratères.";
+				message[0] = "Il faut un mot de passe compris entre 6 et 10 caratères.";
 			}
 			else{
 				if(personnel.getMotPasse().equals(mdp)){
@@ -200,11 +200,7 @@ public class Manager {
 
 		public void enregistrerPersonnnel(Personnels personnels) {
 			// TODO Auto-generated method stub
-
-			personnelsDAO.addPersonnel(personnels);
-
-
-			String[] message = {"", "", ""};
+			String[] message = {"", "", "", ""};
 			Boolean verif = true;
 			
 			if(personnels.getNom().length() == 0){
@@ -212,14 +208,20 @@ public class Manager {
 				message[0] = "Il faut un nom.";
 			}
 			else{
-				if(personnelsDAO.getNbPersonnelsByName(personnels.getNom()) > 0){
+				if(personnels.getNom().length() > 30){
 					verif = false;	
-					message[2] = "Cet utilisateur existe déjâ.";
+					message[3] = "Le nom doit faire moins de 30 caratères.";
+				}
+				else{
+					if(personnelsDAO.getNbPersonnelsByName(personnels.getNom()) > 0){
+						verif = false;	
+						message[2] = "Cet utilisateur existe déjâ.";
+					}
 				}
 			}
-			if(personnels.getMotPasse().length() < 6){
+			if(personnels.getMotPasse().length() < 6 || personnels.getMotPasse().length() > 10){
 				verif = false;	
-				message[1] = "Il faut un mot de passe d'un min de 6 caratères.";
+				message[1] = "Il faut un mot de passe compris entre 6 et 10 caratères.";
 			}
 		
 			if(verif){
@@ -239,8 +241,7 @@ public class Manager {
 			else{
 				new JD_Information(message);
 			}
-
-		}
+}
 		
 
 		// Ajoute un client	
